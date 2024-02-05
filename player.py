@@ -38,8 +38,6 @@ class Player(pygame.sprite.Sprite):
             self.direction = -1
             self.position[0] -= self.speed
             self.animate_run()
-        def move_down(self):
-            self.position[1] += self.speed
         def jump(self, gravity_zones):
             self.position[1] -= self.jump_height
             self.animate_jump()

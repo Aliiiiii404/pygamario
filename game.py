@@ -16,14 +16,14 @@ class Game:
         # load data from pytmx
         tmx_data = pytmx.util_pygame.load_pygame("maps/map.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
-        map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+        self.map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         # font
         self.font = pygame.font.Font(None, 36)
         # create player
         player_position = tmx_data.get_object_by_name("player_spawn")
         self.player = Player(player_position.x, player_position.y)
         # create map layers
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
         self.group.add(self.player)
         # checkpoint text
         self.checkpoint_text = tmx_data.get_object_by_name("checkpointText")
@@ -46,12 +46,14 @@ class Game:
         # handle movement
         if pressed[pygame.K_SPACE]:
             self.player.jump(self.gravity_zones)
-        elif pressed[pygame.K_DOWN]:
-            self.player.move_down()
         elif pressed[pygame.K_LEFT]:
             self.player.move_left()
         elif pressed[pygame.K_RIGHT]:
             self.player.move_right()
+        elif pressed[pygame.K_RETURN] or pressed[pygame.K_KP_ENTER]:
+            # zoom on the player
+            if self.map_layer.zoom != 2:
+                self.map_layer.zoom = 2
 
     # Check if checkpoint is reached
     def checkpoint_reached(self, checkpoint_position):
@@ -75,6 +77,8 @@ class Game:
             self.player.save_location()
             self.handle_input()
             self.update()
+            # the camera will keep the player centered
+            self.group.center(self.player.rect.center)
             self.group.draw(self.screen)
             pygame.display.flip()
             for event in pygame.event.get():

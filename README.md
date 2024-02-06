@@ -11,3 +11,5 @@
  - [ ] Make player only jump one time if so he cant spam jump in the air.
  - [x] Add code for checkpoint.
  - [ ] Add more levels.
+ - [ ] Add traps
+ - [ ] Add game audio

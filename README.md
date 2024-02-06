@@ -3,6 +3,8 @@
 
 ![Image Alt Text](https://github.com/Aliiiiii404/pygamario/blob/main/screenshots/pygamario.png)
 
+![Image Alt Text](https://github.com/Aliiiiii404/pygamario/blob/main/screenshots/pygamario-2.png)
+
 ## Todo :
  - [x] Add gravity for the player. 
  - [ ] Add code for double jump.

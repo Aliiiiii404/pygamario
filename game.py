@@ -50,8 +50,8 @@ class Game:
         elif pressed[pygame.K_RIGHT]:
             self.player.move_right()
     # Change level 
-    def change_level(self):
-        tmx_data = pytmx.util_pygame.load_pygame("./maps/map-2.tmx")
+    def change_level(self, level):
+        tmx_data = pytmx.util_pygame.load_pygame(f"./maps/map-{level}.tmx")
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
@@ -76,7 +76,7 @@ class Game:
     def checkpoint_reached(self, checkpoint_position):
         player_position = self.player.get_position()
         if player_position.colliderect(checkpoint_position):
-            self.change_level()
+            self.change_level(self.level + 1)
             print("Checkpoint reached")
             
     # update

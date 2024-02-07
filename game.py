@@ -45,9 +45,9 @@ class Game:
         # handle movement
         if pressed[pygame.K_SPACE]:
             self.player.jump(self.gravity_zones)
-        elif pressed[pygame.K_q]:
+        elif pressed[pygame.K_LEFT]:
             self.player.move_left()
-        elif pressed[pygame.K_d]:
+        elif pressed[pygame.K_RIGHT]:
             self.player.move_right()
     # Change level 
     def change_level(self, level):

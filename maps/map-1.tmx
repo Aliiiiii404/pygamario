@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="149">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="150">
  <tileset firstgid="1" source="background.tsx"/>
  <tileset firstgid="19" source="terrain.tsx"/>
  <tileset firstgid="261" source="backgrounds.tsx"/>
@@ -250,5 +250,6 @@
   <object id="137" type="collision" x="753.25" y="641" width="13.75" height="16.5"/>
   <object id="145" type="checkpoint" x="773.333" y="608.667" width="28" height="46.6667"/>
   <object id="147" type="collision" x="794.667" y="4" width="5.33333" height="649.333"/>
+  <object id="149" type="collision" x="3.05998" y="1.22399" width="796.818" height="15.9119"/>
  </objectgroup>
 </map>

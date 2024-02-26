@@ -11,19 +11,17 @@ class Trap(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.position = [x, y]
             # the trap speed
-            self.speed = 3
+            self.speed = 0.1
         # Set the sprite sheet
         def set_sprite_sheet(self, sheet_name):
             self.sprite_sheet = pygame.image.load(f'./maps/adventure/Traps/Saw/{sheet_name}')
         # the trap movement
         def move_right(self):
             self.position[0] += self.speed 
-            self.rect = self.image.get_rect(topleft=self.position)
-            print("Trap is moving right")
+            self.rect.topleft = self.position
         def move_left(self):
             self.position[0] -= self.speed
-            self.rect = self.image.get_rect(topleft=self.position)
-            print("Trap is moving left")
+            self.rect.topleft = self.position
 
         def get_image(self, x, y):
            image = pygame.Surface([32, 32])
@@ -32,6 +30,7 @@ class Trap(pygame.sprite.Sprite):
         
         def get_position(self):
             return self.rect
+
         def update(self):
-            self.rect.topleft = self.position
+            pass
 

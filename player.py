@@ -1,5 +1,4 @@
 from itertools import filterfalse
-from time import sleep
 import pygame
 
 
@@ -45,6 +44,9 @@ class Player(pygame.sprite.Sprite):
         def double_jump(self):
             print("code for double jump didnt go brrrrrrrrr ;(")
 
+        def back_to_spawn(self, x, y):
+            self.position[0] = x
+            self.position[1] = y 
         # Movment animation
         def animate_run(self):
             # Update frame index for animation

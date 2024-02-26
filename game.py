@@ -21,10 +21,12 @@ class Game:
         # font
         self.font = pygame.font.Font(None, 36)
         # create player
-        player_position = self.tmx_data.get_object_by_name("player_spawn")
-        self.player = Player(player_position.x, player_position.y)
+        self.player_position = self.tmx_data.get_object_by_name("player_spawn")
+        self.player = Player(self.player_position.x, self.player_position.y)
         # set level
         self.level = 1
+        # set trap 
+        self.trap = None
         # create map layers
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
         self.group.add(self.player)
@@ -67,9 +69,10 @@ class Game:
                 self.collision_zones.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
             if obj.type == "checkpoint":
                 self.checkpoint_position = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
+            if obj.type == "lava":
+                self.lava = pygame.Rect(obj.x, obj.y, obj.width, obj.height)
         # add player 
-        player_position = self.tmx_data.get_object_by_name("player_spawn")
-        self.player = Player(player_position.x, player_position.y)
+        self.player = Player(self.player_position.x, self.player_position.y)
         self.group.add(self.player)
     
     # Check if checkpoint is reached
@@ -93,24 +96,11 @@ class Game:
                     trap_limit2_zone.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
             trap1_spawn = self.tmx_data.get_object_by_name("trap1_spawn")
+            # lava_rect = lava.rect
             self.trap = Trap(trap1_spawn.x, trap1_spawn.y)
             self.group.add(self.trap)
             player_rect = self.player.get_position()
             trap_rect = self.trap.get_position()
-            # # # make the trap movement
-            # for limit, limit2 in trap_limit1_zone, trap_limit2_zone:
-            #     limit1_rect = pygame.Rect(limit.x, limit.y, limit.width, limit.height)
-            #     limit2_rect = pygame.Rect(limit2.x, limit2.y, limit2.width, limit2.height)
-            #     if not trap_rect.colliderect(limit1_rect) and not trap_rect.colliderect(limit2_rect):
-            #         self.trap.move_right()
-            #         break
-            #     elif trap_rect.colliderect(limit1_rect):
-            #         self.trap.move_left()
-            #         break
-            #     elif trap_rect.colliderect(limit2_rect):
-            #         self.trap.move_right()
-            #         break
-            # Make the trap movement
             for limit in trap_limit1_zone:
                 limit1_rect = pygame.Rect(limit.x, limit.y, limit.width, limit.height)
                 if trap_rect.colliderect(limit1_rect):
@@ -124,10 +114,9 @@ class Game:
                 # If trap is not colliding with either limit, move right
                 else:
                     self.trap.move_left()
-            # if the player touches the trap
-            if trap_rect.colliderect(player_rect):
-                print("Trap touched")
-
+            # if the player touches the trap or the lava, the player will go back to the spawn
+            if trap_rect.colliderect(player_rect) or player_rect.colliderect(self.lava):
+               self.player.back_to_spawn(self.player_position.x, self.player_position.y)
     # update
     def update(self):
         self.group.update()
@@ -136,6 +125,8 @@ class Game:
             if self.player.feet.collidelist(self.collision_zones) > -1:
                 self.player.move_back()
         self.checkpoint_reached(self.checkpoint_position)
+        if self.trap:
+            self.trap.update()
     # Run until the user asks to quit
     def run(self):
         clock = pygame.time.Clock()
@@ -154,7 +145,4 @@ class Game:
                     running = False
             clock.tick(60)
         pygame.quit()
-
-
-
 

@@ -8,7 +8,7 @@
 ## Todo :
  - [x] Add gravity for the player. 
  - [ ] Add code for double jump.
- - [ ] Make player only jump one time if so he cant spam jump in the air.
+ - [ ] Make player only jump one time so he cant spam jump in the air.
  - [x] Add code for checkpoint.
  - [ ] Add more levels.
  - [x] Add traps

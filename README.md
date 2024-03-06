@@ -1,6 +1,7 @@
 # pygamario
-2d game using pygame and Tiled
+### a 2d game with Python(pygame) and Tiled
 
+screenshots:
 ![Image Alt Text](https://github.com/Aliiiiii404/pygamario/blob/main/screenshots/pygamario.png)
 
 ![Image Alt Text](https://github.com/Aliiiiii404/pygamario/blob/main/screenshots/pygamario-1.png)
